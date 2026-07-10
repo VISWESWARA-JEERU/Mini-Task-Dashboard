@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: #2563eb;
+  --color-secondary: #0f172a;
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+
+  --font-sans: "Inter", sans-serif;
+
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
