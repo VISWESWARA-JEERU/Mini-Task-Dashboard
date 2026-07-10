@@ -2,7 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { createSubtask, addStatusUpdate } from "../services/memberApi";
 
-export default function AddSubtaskModal({ onClose, onSuccess }) {
+function AddSubtaskModal({ onClose, onSuccess }) {
   const [formData, setFormData] = useState({
     task_id: "",
     title: "",
@@ -160,3 +160,4 @@ export default function AddSubtaskModal({ onClose, onSuccess }) {
     </div>
   );
 }
+export default AddSubtaskModal;

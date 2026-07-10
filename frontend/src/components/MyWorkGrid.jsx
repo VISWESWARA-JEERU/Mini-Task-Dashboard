@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp, Save } from "lucide-react";
 import { updateSubtask, addStatusUpdate } from "../services/memberApi";
 import StatusHistory from "./StatusHistory";
 
-export default function MyWorkGrid({ tasks, onRefresh, loading }) {
+function MyWorkGrid({ tasks, onRefresh, loading }) {
   const [expandedRow, setExpandedRow] = useState(null);
   const [statusDescriptions, setStatusDescriptions] = useState({});
 
@@ -213,3 +213,4 @@ export default function MyWorkGrid({ tasks, onRefresh, loading }) {
     </div>
   );
 }
+export default MyWorkGrid;

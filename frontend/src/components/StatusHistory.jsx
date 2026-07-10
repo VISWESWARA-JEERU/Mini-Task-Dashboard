@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getStatusHistory } from "../services/memberApi";
 
-export default function StatusHistory({ subtaskId }) {
+function StatusHistory({ subtaskId }) {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -36,3 +36,4 @@ export default function StatusHistory({ subtaskId }) {
     </div>
   );
 }
+export default StatusHistory;
