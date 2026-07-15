@@ -10,9 +10,9 @@ user=os.getenv("DB_USER")
 password=os.getenv("DB_PASSWORD")
 port=os.getenv("DB_PORT")
 
-db_url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
+# db_url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
 
-
+db_url = os.getenv("DATABASE_URL")
 
 engine = create_engine(db_url)
 
