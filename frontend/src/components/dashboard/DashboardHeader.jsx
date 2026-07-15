@@ -5,6 +5,7 @@ import {
   RefreshCcw,
   UserRound,
 } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 export default function DashboardHeader({
   memberName,
@@ -14,7 +15,17 @@ export default function DashboardHeader({
   onAddSubtask,
   onOpenSidebar,
   onToggleNotifications,
-}) {
+})
+
+{
+   const handleLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  window.location.href = "/login";
+};
+
+
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -28,8 +39,8 @@ export default function DashboardHeader({
           </button>
 
           <div className="hidden sm:block">
-            <p className="text-sm text-slate-500">Logged in as</p>
-            <p className="font-semibold text-slate-900">{memberName}</p>
+            <p className="text-sm text-slate-500">Dashboard</p>
+            <p className="font-semibold text-slate-900">Member Task managemnt</p>
           </div>
         </div>
 
@@ -61,7 +72,7 @@ export default function DashboardHeader({
               </span>
             )}
           </button>
-
+{/* 
           <button
             type="button"
             onClick={onAddSubtask}
@@ -69,14 +80,16 @@ export default function DashboardHeader({
           >
             <Plus size={17} />
             <span className="hidden sm:inline">Add Subtask</span>
-          </button>
+          </button> */}
 
-          <div className="hidden items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 md:flex">
-            <UserRound size={18} className="text-slate-600" />
-            <span className="max-w-36 truncate text-sm font-medium text-slate-700">
-              {memberName}
-            </span>
-          </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="hidden items-center gap-2 rounded-xl bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-100 md:flex"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
         </div>
       </div>
     </header>

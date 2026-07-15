@@ -127,6 +127,7 @@ export default function MemberDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedTaskId, setSelectedTaskId] = useState("");
 
   /*
    * Replace this temporary user object with the user information
@@ -165,7 +166,7 @@ export default function MemberDashboard() {
 
       setError(
         requestError.response?.data?.detail ||
-          "Unable to load assigned tasks.",
+        "Unable to load assigned tasks.",
       );
     } finally {
       setLoading(false);
@@ -175,6 +176,12 @@ export default function MemberDashboard() {
   useEffect(() => {
     fetchTasks();
   }, []);
+
+
+  const openAddSubtaskModal = (taskId = "") => {
+    setSelectedTaskId(taskId);
+    setShowModal(true);
+  };
 
   /*
    * Calculate task counts once whenever the task list changes.
@@ -321,30 +328,27 @@ export default function MemberDashboard() {
       <div className="lg:pl-72">
         <DashboardHeader
           memberName={loggedInUser.name}
-          notificationCount={assignmentNotifications.length}
+          notificationCount={0}
           loading={loading}
           onRefresh={fetchTasks}
-          onAddSubtask={() => setShowModal(true)}
+          onAddSubtask={() => openAddSubtaskModal()}
           onOpenSidebar={() => setSidebarOpen(true)}
-          onToggleNotifications={() =>
-            setShowNotifications((current) => !current)
-          }
         />
 
         <main className="p-4 sm:p-6 lg:p-8">
           <div className="mx-auto max-w-[1600px]">
             <section className="mb-6">
-              <p className="text-sm font-medium text-blue-600">
-                Member Workspace
+              <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
+                Dashboard Overview
               </p>
 
-              <h1 className="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">
-                Welcome, {loggedInUser.name}
+              <h1 className="mt-1 text-3xl font-bold text-slate-900">
+                Task Management Workspace
               </h1>
 
-              <p className="mt-2 text-sm text-slate-500">
-                Manage assigned tasks, create subtasks, and update your
-                daily progress.
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">
+                View assigned tasks, manage subtasks, update work progress,
+                and monitor completion status from a single dashboard.
               </p>
             </section>
 
@@ -385,6 +389,7 @@ export default function MemberDashboard() {
                 tasks={filteredTasks}
                 loading={loading}
                 onRefresh={fetchTasks}
+                onAddSubtask={openAddSubtaskModal}
                 emptyMessage={`No ${activeMenuLabel.toLowerCase()} found.`}
               />
             </section>
@@ -394,10 +399,14 @@ export default function MemberDashboard() {
 
       {showModal && (
         <AddSubtaskModal
-          onClose={() => setShowModal(false)}
-          onSuccess={() => {
+          initialTaskId={selectedTaskId}
+          onClose={() => {
             setShowModal(false);
-            fetchTasks();
+            setSelectedTaskId("");
+          }}
+          onSuccess={async () => {
+            await fetchTasks();
+            setSelectedTaskId("");
           }}
         />
       )}
