@@ -11,8 +11,8 @@ import {
 // FIX: Matching standard lowercase casing typically used in the backend routes/services
 import { getMyTasks } from "../services/memberApi";
 
-import AddSubtaskModal from "../components/dashboard/AddSubtaskModal";
-import MyWorkGrid from "../components/dashboard/MyWorkGrid";
+import AddSubtaskModal from "../components/AddSubtaskModal";
+import MyWorkGrid from "../components/MyWorkGrid";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import DashboardSidebar from "../components/dashboard/DashboardSidebar";
 import KPICard from "../components/dashboard/KPICard";
